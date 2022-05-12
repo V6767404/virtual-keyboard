@@ -35,7 +35,7 @@ document.body.append(keyboard);
 
 const description = document.createElement("p");
 description.classList.add("description");
-description.innerText = "Switch language: Left (Ctrl + Alt)";
+description.innerText = "Switch language: Left (Ctrl + Shift)";
 document.body.appendChild(description);
 
 // create html keyboard
@@ -81,43 +81,13 @@ document.addEventListener("keydown", function (event) {
   if (pressedAll.length > 1) {
     for (let i = 0; i < pressedAll.length; i++) {
       if (pressedAll[i].classList.contains("CapsLock") || pressedAll[i].classList.contains("ShiftLeft") || pressedAll[i].classList.contains("ShiftRight")) {
-        if (
-          !(
-            pressedKey.classList.contains("ControlLeft") ||
-            pressedKey.classList.contains("AltLeft") ||
-            pressedKey.classList.contains("Lang") ||
-            pressedKey.classList.contains("ShiftLeft") ||
-            pressedKey.classList.contains("CapsLock") ||
-            pressedKey.classList.contains("Tab") ||
-            pressedKey.classList.contains("Backspace") ||
-            pressedKey.classList.contains("Delete") ||
-            pressedKey.classList.contains("Enter") ||
-            pressedKey.classList.contains("ControlRight") ||
-            pressedKey.classList.contains("AltRight") ||
-            pressedKey.classList.contains("ShiftRight")
-          )
-        ) {
+        if (!(isFnKey = fnKeys.includes(event.code))) {
           textarea.value += pressedKey.querySelector(".on").innerHTML;
           return;
         }
       }
     }
-  } else if (
-    !(
-      pressedKey.classList.contains("ControlLeft") ||
-      pressedKey.classList.contains("AltLeft") ||
-      pressedKey.classList.contains("Lang") ||
-      pressedKey.classList.contains("ShiftLeft") ||
-      pressedKey.classList.contains("CapsLock") ||
-      pressedKey.classList.contains("Tab") ||
-      pressedKey.classList.contains("Backspace") ||
-      pressedKey.classList.contains("Delete") ||
-      pressedKey.classList.contains("Enter") ||
-      pressedKey.classList.contains("ControlRight") ||
-      pressedKey.classList.contains("AltRight") ||
-      pressedKey.classList.contains("ShiftRight")
-    )
-  ) {
+  } else if (!(isFnKey = fnKeys.includes(event.code))) {
     textarea.value += pressedKey.querySelector(".on").innerHTML.toLowerCase();
   }
 
